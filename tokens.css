@@ -1,0 +1,123 @@
+/*
+ * ウマ娘関連ツール共通のデザイントークン。
+ *
+ * 値はレースエミュレータ（apps/web）でいま動いているものをそのまま移した。
+ * DESIGN.md の 2 節「土台：レースエミュレータの既存トークン体系」に当たる。
+ * 移した時点の記録は raceemu の docs/design-tokens-current.md にある。
+ *
+ * **素の CSS 変数だけで書く。** Tailwind の @theme はここに書かない。
+ * 取り込む側が Tailwind とは限らないためである（F-13 は Flask + 素の CSS）。
+ * Tailwind を使う側は、自分の CSS で @theme inline に橋渡しする。
+ *
+ * 暗い表示は :root に対する [data-theme='dark'] の差し替えで成立させる。
+ * 切り替えは <html> の data-theme 属性で行う前提である。
+ * 属性が無ければ明るい表示になる。
+ *
+ * まだ入れていないもの（DESIGN.md 8 節の未決定事項）:
+ * - 強調色の朱（3 節）
+ * - 書体の BIZ UDPゴシック（4 節）。いまの値は移す前のものである
+ * - 余白の刻み。レースエミュレータは Tailwind の既定をそのまま使っている
+ */
+
+:root {
+  /* 面。paper が地、surface がその上の面、sunken は一段落とした面 */
+  --uma-paper: #f5f4f1;
+  --uma-surface: #fcfcfb;
+  --uma-sunken: #eeece7;
+
+  /* 罫線。rule が弱い区切り、rule2 が枠 */
+  --uma-rule: #dedbd3;
+  --uma-rule2: #c6c2b8;
+
+  /* 文字。ink が本文、数字が大きいほど弱い */
+  --uma-ink: #12120f;
+  --uma-ink2: #52514e;
+  --uma-ink3: #8a877e;
+
+  /* 系列の色。図の 1〜3 列目に充てる。s1 は強調色も兼ねる */
+  --uma-s1: #2a78d6;
+  --uma-s2: #eb6834;
+  --uma-s3: #1baf7a;
+
+  /* 選択中の状態 */
+  --uma-acc-tint: #e7effa;
+  --uma-acc-ink: #1c5cab;
+
+  /* 主ボタン */
+  --uma-primary-bg: #12120f;
+  --uma-primary-fg: #ffffff;
+
+  /* 注意 */
+  --uma-warn-tint: #fdf6e3;
+  --uma-warn-rule: #e8d9a8;
+  --uma-warn-ink: #7a5c12;
+
+  /* 誤り */
+  --uma-bad-tint: #fdeceb;
+  --uma-bad-rule: #f0c3bf;
+  --uma-bad-ink: #a3312a;
+
+  /*
+   * 図のための色。canvas（uPlot）と SVG は CSS の変数を直接は使えないので、
+   * 描く側が getComputedStyle で読む。系列の色を面の色から分けてあるのは、
+   * 暗い表示で明るさを上げる必要があるためである（s1 をそのまま暗い地に
+   * 置くと沈む）。
+   */
+  --uma-chart-speed: #2a78d6;
+  --uma-chart-sp: #eb6834;
+  /* 目標速度・勾配。系列ではなく文脈なので地の文字色に寄せる */
+  --uma-chart-context: #52514e;
+  --uma-chart-grid: #eceae4;
+  /* コーナーの帯 */
+  --uma-chart-band: rgba(0, 0, 0, 0.045);
+  /* 区間の境の破線 */
+  --uma-chart-phase: rgba(0, 0, 0, 0.18);
+  /* 全頭同時の図の、自分と 1 着以外の線 */
+  --uma-chart-other: rgba(82, 81, 78, 0.45);
+
+  /* 角丸。3 段あるが、いまはすべて同じ値である */
+  --uma-radius-sm: 3px;
+  --uma-radius-md: 3px;
+  --uma-radius-lg: 3px;
+
+  /* 書体。DESIGN.md 4 節の BIZ UDPゴシックへの移行は別に行う */
+  --uma-font-sans: 'IBM Plex Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --uma-font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+}
+
+[data-theme='dark'] {
+  --uma-paper: #17181a;
+  --uma-surface: #1f2123;
+  --uma-sunken: #272a2d;
+
+  --uma-rule: #34373b;
+  --uma-rule2: #46494e;
+
+  --uma-ink: #e9e7e2;
+  --uma-ink2: #aaa7a1;
+  --uma-ink3: #77746e;
+
+  /* 系列の色は明暗で変えていない。図の色（--uma-chart-*）だけ持ち上げる */
+
+  --uma-acc-tint: rgba(58, 138, 232, 0.22);
+  --uma-acc-ink: #7fb2ea;
+
+  --uma-primary-bg: #e9e7e2;
+  --uma-primary-fg: #17181a;
+
+  --uma-warn-tint: rgba(232, 190, 80, 0.14);
+  --uma-warn-rule: #5c4d24;
+  --uma-warn-ink: #d8bd6a;
+
+  --uma-bad-tint: rgba(224, 108, 98, 0.14);
+  --uma-bad-rule: #6b3a36;
+  --uma-bad-ink: #e29a94;
+
+  --uma-chart-speed: #3987e5;
+  --uma-chart-sp: #d95926;
+  --uma-chart-context: #c3c2b7;
+  --uma-chart-grid: #2a2a28;
+  --uma-chart-band: rgba(255, 255, 255, 0.05);
+  --uma-chart-phase: rgba(255, 255, 255, 0.22);
+  --uma-chart-other: rgba(195, 194, 183, 0.5);
+}

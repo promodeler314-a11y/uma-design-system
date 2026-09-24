@@ -15,7 +15,6 @@
  *
  * まだ入れていないもの（DESIGN.md 8 節の未決定事項）:
  * - 強調色の朱（3 節）
- * - 書体の BIZ UDPゴシック（4 節）。いまの値は移す前のものである
  * - 余白の刻み。レースエミュレータは Tailwind の既定をそのまま使っている
  */
 
@@ -80,9 +79,15 @@
   --uma-radius-md: 3px;
   --uma-radius-lg: 3px;
 
-  /* 書体。DESIGN.md 4 節の BIZ UDPゴシックへの移行は別に行う */
-  --uma-font-sans: 'IBM Plex Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
-  --uma-font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  /*
+   * 書体（DESIGN.md 4 節）。本文と見出しは BIZ UDPゴシック。
+   * BIZ UDPゴシックの数字はプロポーショナルで、tabular-nums を指定しても幅が
+   * 揃わなかった（「1」10 個が 100.78px、「0」10 個が 121.56px。Chromium で計測）。
+   * そのため数値の列には、数字の幅が揃う BIZ UDゴシックを使う。
+   * 読み込みは Google Fonts（400 と 700）。取り込む側が <link> を置く。
+   */
+  --uma-font-sans: 'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --uma-font-mono: 'BIZ UDGothic', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', monospace;
 }
 
 [data-theme='dark'] {

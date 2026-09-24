@@ -14,7 +14,6 @@
  * 属性が無ければ明るい表示になる。
  *
  * まだ入れていないもの（DESIGN.md 8 節の未決定事項）:
- * - 強調色の朱（3 節）
  * - 余白の刻み。レースエミュレータは Tailwind の既定をそのまま使っている
  */
 
@@ -42,9 +41,17 @@
   --uma-acc-tint: #e7effa;
   --uma-acc-ink: #1c5cab;
 
-  /* 主ボタン */
-  --uma-primary-bg: #12120f;
-  --uma-primary-fg: #ffffff;
+  /*
+   * 強調色の朱（DESIGN.md 3 節）。使い所は主ボタン（その区画で計算を走らせる
+   * ボタン）に限る。あちこちに使うと、押すべき所が一目で分からなくなる。
+   * 白い文字を載せて 5.77:1、地（paper）の上の文字としても AA を満たす。
+   */
+  --uma-accent: #b8391a;
+  --uma-accent-fg: #ffffff;
+
+  /* 主ボタン。朱を当てる */
+  --uma-primary-bg: var(--uma-accent);
+  --uma-primary-fg: var(--uma-accent-fg);
 
   /* 注意 */
   --uma-warn-tint: #fdf6e3;
@@ -107,8 +114,9 @@
   --uma-acc-tint: rgba(58, 138, 232, 0.22);
   --uma-acc-ink: #7fb2ea;
 
-  --uma-primary-bg: #e9e7e2;
-  --uma-primary-fg: #17181a;
+  /* 暗い地の上では明るくする。黒い文字を載せて 6.44:1 */
+  --uma-accent: #f07a52;
+  --uma-accent-fg: #17181a;
 
   --uma-warn-tint: rgba(232, 190, 80, 0.14);
   --uma-warn-rule: #5c4d24;
